@@ -29,4 +29,4 @@ COPY hbase-site.xml /opt/hbase-1.2.0-cdh5.12.1/conf/hbase-site.xml
 # 60030 – regionserver web port
 EXPOSE 60000 60010 60020 60030
 
-CMD /usr/bin/supervisord -c /etc/supervisord.conf
+CMD bash /usr/bin/supervisord -c /etc/supervisord.conf
