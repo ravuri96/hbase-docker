@@ -8,7 +8,6 @@ WORKDIR /
 
 COPY supervisord.conf /etc/supervisord.conf
 
-
 RUN \
     apk add --no-cache \
     supervisor \
@@ -16,10 +15,10 @@ RUN \
     bash && \
     wget -q http://archive.cloudera.com/cdh5/cdh/5/hbase-1.2.0-cdh5.12.1.tar.gz -P /opt && \
     tar xzf /opt/hbase-1.2.0-cdh5.12.1.tar.gz  -C /opt && \
-    chmod 777 /entrypoint.sh && \
     chown -R root: /opt/hbase-1.2.0-cdh5.12.1 && \
     rm -fr /opt/hbase-1.2.0-cdh5.12.1.tar.gz && \
     apk del wget
+    
 COPY hbase-site.xml /opt/hbase-1.2.0-cdh5.12.1/conf/hbase-site.xml
 
 # Expose HBase ports
