@@ -6,8 +6,6 @@ ENV JAVA_HOME "/usr/lib/jvm/java-1.8-openjdk/jre"
 
 WORKDIR /
 
-COPY entrypoint.sh /
-
 COPY supervisord.conf /etc/supervisord.conf
 
 
@@ -22,6 +20,7 @@ RUN \
     chown -R root: /opt/hbase-1.2.0-cdh5.12.1 && \
     rm -fr /opt/hbase-1.2.0-cdh5.12.1.tar.gz && \
     apk del wget
+COPY hbase-site.xml /opt/hbase-1.2.0-cdh5.12.1/conf/hbase-site.xml
 
 # Expose HBase ports
 # 21081 – zookeeper port
@@ -31,4 +30,4 @@ RUN \
 # 60030 – regionserver web port
 EXPOSE 60000 60010 60020 60030
 
-ENTRYPOINT ["/entrypoint.sh"]
+CMD /usr/bin/supervisord -c /etc/supervisord.conf
