@@ -14,8 +14,8 @@ docker build -t hbase-docker:${tag_name_which_you_like} .
 
 ```
 docker-compose up -d
-
 ```
+
 After starting up the docker container. verify that all services are running.
 
 copy paste the both links in browser and see all the service are working.
