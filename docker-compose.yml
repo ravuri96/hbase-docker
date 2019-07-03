@@ -1,0 +1,28 @@
+version: "3.4"
+services:
+
+  zookeeper:
+    image: "zookeeper:latest"
+    container_name: zookeeper
+    network_mode: "host"
+    environment:
+      - "ALLOW_ANONYMOUS_LOGIN=yes"
+      - "ZOO_PORT_NUMBER=2181"
+    ports:
+      - "2181:2181"
+    restart: always
+
+  hbase:
+    image: "hbase-docker:latest"
+    container_name: hbase
+    network_mode: "host"
+    environment:
+      - "HBASE_ZOOKEEPER_QUORUM=${hostname}"
+      - "HBASE_ZOOKEEPER_PROPERTY_CLIENTPORT=2181"
+    ports:
+      - "60000:60000"
+      - "60010:60010"
+      - "60020:60020"
+      - "60030:60030"
+    restart: always
+    hostname: ${hostname}
