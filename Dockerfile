@@ -10,7 +10,7 @@ ENV APPLICATION_HOME /
 
 ENV CONFIG_FILE_PATH /opt/hbase-1.2.0-cdh5.12.1/conf/hbase-site.xml
 
-ENV CONFIG_FILE_TEMPLATE_PATH ${APPLICATION_HOME}/hbase-site.xml.template
+ENV CONFIG_FILE_TEMPLATE_PATH /hbase-site.xml.template
 
 WORKDIR ${APPLICATION_HOME}
 
@@ -26,7 +26,7 @@ EXPOSE 60000 60010 60020 60030
 COPY supervisord.conf /etc/supervisord.conf
 
 RUN set -x && \
-    apk add --no-cache supervisor wget bash build_deps gettext
+    apk add --no-cache supervisor wget bash build_deps gettext && \
     apk add --update libintl && \
     wget -q http://archive.cloudera.com/cdh5/cdh/5/hbase-1.2.0-cdh5.12.1.tar.gz -P /opt && \
     tar xzf /opt/hbase-1.2.0-cdh5.12.1.tar.gz  -C /opt && \
@@ -38,4 +38,4 @@ RUN set -x && \
 COPY hbase-site.xml.template $CONFIG_FILE_TEMPLATE_PATH
 
 
-ENTRYPOINT [entrypoint.sh]
+ENTRYPOINT ["entrypoint.sh"]

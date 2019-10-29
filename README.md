@@ -1,6 +1,6 @@
 # hbase-docker
 
-This is regular light weight hbase docker images which run in **hbase.cluster.distributed**. This image can be used for testing and local enviroments to spinup a spinup a hbase in distributed mode.
+This is regular light weight hbase docker image which run in **hbase.cluster.distributed mode**. This image can be used for testing and local enviroments to spinup a spinup a hbase in distributed mode.
 
 
 ## To build image:
