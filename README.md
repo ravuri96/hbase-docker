@@ -4,7 +4,7 @@ This is regular light weight hbase docker images which run in **hbase.cluster.di
 
 
 ## To build image:
-Clone the repositeroy build the docker image using the commands below:
+Clone the repo and build the docker image using the commands below:
 
 ```
 docker build -t hbase-docker:${tag_name_which_you_like} .

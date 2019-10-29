@@ -13,7 +13,7 @@ services:
     restart: always
 
   hbase:
-    image: "hbase-docker:prem"
+    image: "ravuri96/hbase-docker:latest"
     container_name: hbase
     network_mode: "host"
     environment:
