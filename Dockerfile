@@ -1,4 +1,4 @@
-FROM java:8-jre-alpine
+FROM alpine:latest
 
 LABEL maintainer "PREM RAVURI <ravuripremchand@gmail.com>"
 
@@ -24,18 +24,20 @@ WORKDIR ${APPLICATION_HOME}
 EXPOSE 60000 60010 60020 60030
 
 COPY supervisord.conf /etc/supervisord.conf
-
+COPY entrypoint.sh /
 RUN set -x && \
-    apk add --no-cache supervisor wget bash build_deps gettext && \
+    apk add --no-cache supervisor openjdk8 wget bash&& \
     apk add --update libintl && \
+    apk add --virtual build_deps gettext &&  \
     wget -q http://archive.cloudera.com/cdh5/cdh/5/hbase-1.2.0-cdh5.12.1.tar.gz -P /opt && \
     tar xzf /opt/hbase-1.2.0-cdh5.12.1.tar.gz  -C /opt && \
     chown -R root: /opt/hbase-1.2.0-cdh5.12.1 && \
     rm -fr /opt/hbase-1.2.0-cdh5.12.1.tar.gz && \
     cp /usr/bin/envsubst /usr/local/bin/envsubst && \
+    chmod 777 /entrypoint.sh && \
     apk del wget build_deps wget
-    
+
 COPY hbase-site.xml.template $CONFIG_FILE_TEMPLATE_PATH
 
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
