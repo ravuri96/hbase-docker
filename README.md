@@ -21,3 +21,10 @@ After starting up the docker container. verify that all services are running.
 copy paste the both links in browser and see all the service are working.
 http://localhost/60010 - hbase master server
 http://localhost/60030 - hbase region server
+
+
+## To pull the docker image form dockerhub 
+
+```
+docker pull ravuri96/hbase-docker
+```
